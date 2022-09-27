@@ -1,6 +1,6 @@
 import './App.css';
-import {useEffect, useState, useRef} from "react";
-import {Button, FormControl, Input, InputLabel, TextField} from "@mui/material";
+import {useEffect, useRef, useState} from "react";
+import {Button, FormControl, TextField} from "@mui/material";
 
 
 function App() {
@@ -117,7 +117,7 @@ const Form = ({data, setData, setMessage}) => {
     setData(
       {
         text: '',
-        author: ''
+        author: 'me'
       }
     )
   }
