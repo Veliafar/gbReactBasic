@@ -1,9 +1,25 @@
 import './App.css';
 import {useEffect, useRef, useState} from "react";
-import {Button, FormControl, TextField} from "@mui/material";
+import {Message} from "./message/message";
+import {SendForm} from "./send-form/send-form";
+import {ChatList} from "./chat-list/chat-list";
 
 
 function App() {
+  const chatList = [
+    {
+      id: 1,
+      name: 'Some Name'
+    },
+    {
+      id: 2,
+      name: 'Other Name'
+    },
+    {
+      id: 3,
+      name: 'Random Name'
+    },
+  ];
   const [messageList, setMessageList] = useState([
     {
       author: 'me',
@@ -42,15 +58,18 @@ function App() {
 
   return (
     <div className="wrapper">
-      <ChatList></ChatList>
+      <ChatList chatList={chatList}></ChatList>
 
       <div className="board">
-        <Form data={messageBody} setData={setMessageBody} setMessage={setMessageList}></Form>
+
         <div className="messages-list">
           {
             messageList.map((elem, index) => <Message text={elem.text} author={elem.author} key={index}></Message>)
           }
         </div>
+
+        <SendForm data={messageBody} setData={setMessageBody} setMessage={setMessageList}></SendForm>
+
       </div>
     </div>
   )
@@ -58,90 +77,8 @@ function App() {
 
 export default App;
 
-const ChatList = () => {
-
-  const chatList = [
-    {
-      id: 1,
-      name: 'Some Name'
-    },
-    {
-      id: 2,
-      name: 'Other Name'
-    },
-    {
-      id: 3,
-      name: 'Random Name'
-    },
-  ];
-
-  return (
-    <div className="chat-list">
-      {
-        chatList.map((elem, index) => <div className="chat-list__item" key={index}>
-          {elem.name}
-        </div>)
-      }
-    </div>
-  )
-}
 
 
-const Message = ({author, text}) => {
-  return (
-    <div className="message">
-      <p className="message__author">
-        <span>
-          {author}
-        </span>
-      </p>
-      <p className="message__text">
-        <span>
-          {text}
-        </span>
-      </p>
-    </div>
-  )
-}
 
 
-const Form = ({data, setData, setMessage}) => {
 
-  const {text, author} = data;
-
-  const submitForm = (e) => {
-    e.preventDefault();
-    if (text.length > 0) {
-      setMessage(prevState => [...prevState, {text, author}])
-    }
-    setData(
-      {
-        text: '',
-        author: 'me'
-      }
-    )
-  }
-
-  // const textInput = useRef(null);
-  // useEffect(() => {
-  //   console.log('sdf!!')
-  //   textInput?.current?.focus();
-  // },[text]);
-
-  return (
-    <form className="form" onSubmit={submitForm}>
-
-      <FormControl>
-        <TextField
-          autoFocus
-          // ref={textInput}
-          placeholder="text" id="time"
-          type="text" value={text} onChange={
-          (event) => setData(pervState => ({...pervState, text: event.target.value}))
-        }/>
-      </FormControl>
-
-      <Button type="submit">Отправить</Button>
-    </form>
-  )
-}
