@@ -62,11 +62,14 @@ function App() {
 
       <div className="board">
 
-        <div className="messages-list">
-          {
-            messageList.map((elem, index) => <Message text={elem.text} author={elem.author} key={index}></Message>)
-          }
+        <div className="messages-list-container">
+          <div className="messages-list">
+            {
+              messageList.map((elem, index) => <Message text={elem.text} author={elem.author} key={index}></Message>)
+            }
+          </div>
         </div>
+
 
         <SendForm data={messageBody} setData={setMessageBody} setMessage={setMessageList}></SendForm>
 

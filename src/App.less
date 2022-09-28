@@ -80,16 +80,23 @@ body {
   border-top: 1px solid black;
 }
 
-.messages-list {
+.messages-list-container {
   height: calc(100% - 100px);
   max-height: calc(100% - 100px);
   width: 100%;
   max-width: 100%;
-  flex: 1;
-  display: flex;
-  justify-content: flex-start;
+
   overflow-y: auto;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.messages-list {
+
+
+  display: flex;
   flex-direction: column;
+  align-items: flex-start;
 }
 
 
