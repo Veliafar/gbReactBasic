@@ -6,33 +6,62 @@
   box-sizing: border-box;
 }
 
-.main {
+::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 10px;
+  background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar
+{
+  width: 12px;
+  background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: black;
+}
+
+.wrapper {
   display: flex;
   flex: 1;
   width: 100vw;
   height: 100vh;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 
   background:  #faf3e6;
+  font-size: calc(0.3rem + 0.8vw);
+}
 
+.chat-list {
+  height: 100vh;
+  width: 200px;
+  padding: 24px 0;
+  border-right: 1px solid black;
+  &__item {
+    padding: 12px;
+
+    &:not(:first-child) {
+      border-top: 1px solid black;
+      width: 100%;
+    }
+
+    &:hover {
+      background-color: rgba(0,0,0,0.15);
+      cursor: pointer;
+    }
+  }
 }
 
 .board {
-  position: relative;
-  min-width: 300px;
-  height: 600px;
-  padding: 24px;
-  color: #272625;
-  text-shadow: 1px 1px 2px #fffdd0;
-  border-radius: 8px;
-
-  font-size: calc(0.3rem + 0.8vw);
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
 }
 
 body {
@@ -44,25 +73,30 @@ body {
 }
 
 .form {
+  height: 100px;
+  width: 100%;
   display: flex;
-  flex-direction: column;
   padding: 24px;
-  align-items: center;
-  gap: 12px;
-  border: 1px solid #272625;
-  border-radius: 8px 8px 0 0;
-  min-width: 300px;
-  backdrop-filter: blur(16px);
-  position: absolute;
-  top: 24px;
+  border-top: 1px solid black;
+}
+
+.messages-list-container {
+  height: calc(100% - 100px);
+  max-height: calc(100% - 100px);
+  width: 100%;
+  max-width: 100%;
+
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 .messages-list {
-  height: 600px;
-  min-width: 300px;
-  overflow-y: overlay;
 
 
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 
@@ -70,7 +104,7 @@ body {
   display: flex;
   flex-direction: column;
   padding: 12px 24px;
-  max-width: 300px;
+  width: 100%;
   &__author {
     display: flex;
     align-items: center;
@@ -83,9 +117,7 @@ body {
     font-size: 16px;
 
   }
-  &:first-child {
-    margin-top: 130px;
-  }
+
   &:nth-of-type(2n) {
     background-color: rgba(0,0,0,0.05);
 
